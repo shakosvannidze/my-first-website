@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VOLTREX | ვოლტრექსი</title>
+    
+    <meta property="og:title" content="VOLTREX | ვოლტრექსი" />
+    <meta property="og:description" content="საუკეთესო შეთავაზება: 1+1 საჩუქრად მხოლოდ 119 ლარად!" />
+    <meta property="og:image" content="https://voltrexshop.ct.ws/images/voltrexlogo.png" />
+    <meta property="og:url" content="https://voltrexshop.ct.ws" />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/bpg-nino-mtavruli');
+
+        body { 
+            background: #000; color: #fff; 
+            font-family: 'Inter', 'BPG Nino Mtavruli', sans-serif; 
+            overflow-x: hidden; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        h1, h2, .mtavruli { 
+            font-family: 'BPG Nino Mtavruli', sans-serif; 
+            letter-spacing: 1px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(180deg, #FFFFFF 0%, #555555 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .product-stage {
+            background: radial-gradient(circle at center, #111 0%, #000 90%);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @media (min-width: 1024px) {
+            .product-stage { border-radius: 40px; }
+            .product-stage:hover {
+                border-color: rgba(255,255,255,0.2);
+                transform: scale(1.01);
+            }
+            .group:hover .product-img { transform: scale(1.1); }
+        }
+
+        .buy-btn {
+            background: #fff; color: #000;
+            padding: 12px 16px; border-radius: 12px;
+            font-weight: 900; font-size: 10px; text-transform: uppercase;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        @media (min-width: 768px) {
+            .buy-btn { padding: 16px 32px; font-size: 12px; }
+        }
+        .buy-btn:hover { background: #e0e0e0; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
+
+        .status-dot {
+            width: 8px; height: 8px; background: #00ff00; border-radius: 50%;
+            display: inline-block; margin-right: 8px; box-shadow: 0 0 10px #00ff00;
+        }
+
+        .img-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120px; 
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .img-wrapper { height: 350px; }
+        }
+
+        .product-img {
+            z-index: 10;
+            height: 100%; 
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8));
+            transition: transform 0.5s ease;
+            pointer-events: none;
+        }
+
+        .nav-pill-active {
+            background: #fff !important;
+            color: #000 !important;
+            border-radius: 20px;
+        }
+
+        section { opacity: 0; transform: translateY(40px); }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        .faq-active .faq-answer {
+            max-height: 200px;
+        }
+        .faq-active .faq-plus {
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-50 px-6 py-6 flex justify-between items-center backdrop-blur-md border-b border-white/5">
+        <div class="font-black text-2xl tracking-tighter italic uppercase">VOLTREX<span class="text-white/20">SHOP</span></div>
+        <div class="hidden md:flex space-x-10 text-[10px] font-bold uppercase tracking-widest text-white/50">
+            <a href="#pro" class="hover:text-white transition">PRO სერია</a>
+            <a href="#max" class="hover:text-white transition">MAX სერია</a>
+            <a href="#special-offers" class="hover:text-white transition">აქციები</a>
+        </div>
+        <div class="text-[10px] font-bold border border-white/10 px-5 py-2 rounded-full">კალათა (0)</div>
+    </nav>
+
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4">
+        <div class="flex items-center mb-6">
+            <span class="status-dot animate-pulse"></span>
+            <span class="text-white/40 text-[9px] uppercase tracking-[0.4em] font-bold">მარაგი შევსებულია</span>
+        </div>
+        <h1 class="text-4xl md:text-[10vw] font-black leading-none gradient-text uppercase">
+            ელიტარული<br>ჟღერადობა.
+        </h1>
+        <p class="mt-8 text-white/50 text-sm md:text-lg max-w-xl font-light">
+            საუკეთესო ხარისხი და ვიზუალი. <br>პრემიუმ ჟღერადობა ყველაზე ხელმისაწვდომ ფასად.
+        </p>
+        <div class="mt-12 flex flex-col md:flex-row gap-6">
+            <button class="buy-btn" onclick="lenis.scrollTo('#special-offers')">კოლექციის ნახვა</button>
+            <button onclick="openModal()" class="text-[10px] font-bold uppercase tracking-widest border-b border-white/20 hover:border-white transition pb-1">გაიგე მეტი</button>
+        </div>
+    </section>
+
+    <div id="infoModal" class="fixed inset-0 z-[200] hidden flex items-center justify-center px-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeModal()"></div>
+        <div id="modalContent" class="bg-[#0a0a0a] border border-white/10 p-8 rounded-[32px] max-w-md w-full relative z-10 shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-6 right-6 text-white/20 hover:text-white transition-colors text-2xl">&times;</button>
+            <h3 class="text-xl font-black uppercase italic mb-4 text-white">ჩვენს შესახებ</h3>
+            <div class="text-white/60 text-sm leading-relaxed space-y-4">
+                <p>
+                    <span class="text-white font-bold">VOLTREX</span> არის ონლაინ ტექნიკის მაღაზია, რომელიც ორიენტირებულია მომხმარებელს შესთავაზოს უმაღლესი ხარისხის პრემიუმ აქსესუარები ყველაზე ხელმისაწვდომ ფასად.
+                </p>
+                <p>
+                    ჩვენი მიზანია ტექნოლოგიური ინოვაციები ყველასთვის ხელმისაწვდომი გავხადოთ, ხარისხზე კომპრომისის გარეშე. თითოეული პროდუქტი გადის დეტალურ შემოწმებას გაგზავნამდე.
+                </p>
+            </div>
+            <button class="buy-btn w-full mt-8 !bg-white !text-black" onclick="closeModal()">გასაგებია</button>
+        </div>
+    </div>
+
+    <div id="special-offers" class="max-w-[1300px] mx-auto px-3 md:px-6 py-20">
+        <div class="mb-10 flex items-center gap-4">
+            <h3 class="text-[10px] font-bold uppercase tracking-[0.5em] text-purple-500">ცხელი შეთავაზება</h3>
+            <div class="h-px flex-1 bg-purple-500/20"></div>
+        </div>
+
+        <section id="offers" class="product-stage p-4 md:p-20 flex flex-col md:flex-row items-center gap-4 md:gap-16 border border-purple-500/20 hover:border-purple-500/40" style="background: radial-gradient(circle at center, #1a0b2e 0%, #000 90%);">
+            <div class="flex-1 text-center md:text-left order-2 md:order-1">
+                <div class="flex items-center justify-center md:justify-start gap-2 mb-1 md:mb-2">
+                    <svg class="w-3 h-3 md:w-4 md:h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                    </svg>
+                    <span class="text-[7px] md:text-[9px] font-bold text-purple-400 uppercase tracking-widest">სპეციალური შეთავაზება</span>
+                </div>
+                <h2 class="text-xs md:text-7xl font-black mt-1 md:mt-4 mb-2 md:mb-6 uppercase leading-tight">1+1 <span class="text-purple-400/80 font-light italic block md:inline">საჩუქრად</span></h2>
+                <div class="text-lg md:text-5xl font-bold mb-4 md:mb-6 tracking-tighter">119 ₾</div>
+
+                <div class="mb-6 md:mb-10 bg-white/5 border border-white/5 rounded-2xl p-4 md:p-6 inline-block text-center w-full md:w-auto">
+                    <h4 class="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-4 font-bold">აქციის დასრულებამდე დარჩა:</h4>
+                    <div class="flex justify-center md:justify-start gap-4 md:gap-8">
+                        <div>
+                            <div id="days" class="text-2xl md:text-3xl font-black italic">00</div>
+                            <div class="text-[7px] uppercase text-white/20 mt-1 tracking-widest">დღე</div>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-thin text-white/10">:</div>
+                        <div>
+                            <div id="hours" class="text-2xl md:text-3xl font-black italic">00</div>
+                            <div class="text-[7px] uppercase text-white/20 mt-1 tracking-widest">საათი</div>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-thin text-white/10">:</div>
+                        <div>
+                            <div id="minutes" class="text-2xl md:text-3xl font-black italic">00</div>
+                            <div class="text-[7px] uppercase text-white/20 mt-1 tracking-widest">წუთი</div>
+                        </div>
+                        <div class="text-2xl md:text-3xl font-thin text-white/10">:</div>
+                        <div>
+                            <div id="seconds" class="text-2xl md:text-3xl font-black italic text-purple-500">00</div>
+                            <div class="text-[7px] uppercase text-white/20 mt-1 tracking-widest">წამი</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="buy-btn w-full md:w-auto !bg-purple-500 !text-white hover:!bg-purple-600">აქციის გამოყენება</button>
+            </div>
+            <div class="flex-1 flex justify-center order-1 md:order-2">
+                <div class="img-wrapper group flex items-center justify-center relative">
+                    <img src="images/airpodspro2.png" alt="AirPods Pro 2 Gift" class="product-img absolute -ml-12 md:-ml-24 scale-90 opacity-60 blur-[1px]">
+                    <img src="images/airpodspro2.png" alt="AirPods Pro 2" class="product-img relative z-10">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <main class="max-w-[1300px] mx-auto px-3 md:px-6 pb-20 grid grid-cols-2 md:grid-cols-1 gap-3 md:gap-12">
+        <section id="pro" class="product-stage p-4 md:p-20 flex flex-col md:flex-row items-center gap-4 md:gap-16">
+            <div class="flex-1 text-center md:text-left order-2 md:order-1">
+                <span class="text-[7px] md:text-[9px] font-bold text-white/30 uppercase tracking-widest">ყველაზე გაყიდვადი</span>
+                <h2 class="text-xs md:text-7xl font-black mt-1 md:mt-4 mb-2 md:mb-6 uppercase leading-tight">Pro 2 <span class="text-white/20 font-light italic block md:inline">GEN</span></h2>
+                <div class="text-lg md:text-5xl font-bold mb-4 md:mb-10 tracking-tighter">69 ₾</div>
+                <button class="buy-btn w-full md:w-auto">შეკვეთა</button>
+            </div>
+            <div class="flex-1 flex justify-center order-1 md:order-2">
+                <div class="img-wrapper group">
+                    <img src="images/airpodspro2.png" alt="AirPods Pro 2" class="product-img">
+                </div>
+            </div>
+        </section>
+
+        <section id="max" class="product-stage p-4 md:p-20 flex flex-col md:flex-row-reverse items-center gap-4 md:gap-16">
+            <div class="flex-1 text-center md:text-left order-2">
+                <span class="text-[7px] md:text-[9px] font-bold text-white/30 uppercase tracking-widest">ახალი კოლექცია</span>
+                <h2 class="text-xs md:text-7xl font-black mt-1 md:mt-4 mb-2 md:mb-6 uppercase leading-tight">Pro 3 <span class="text-white/20 font-light italic block md:inline">ULTRA</span></h2>
+                <div class="text-lg md:text-5xl font-bold mb-4 md:mb-10 tracking-tighter">79 ₾</div>
+                <button class="buy-btn w-full md:w-auto">შეკვეთა</button>
+            </div>
+            <div class="flex-1 flex justify-center order-1">
+                <div class="img-wrapper group">
+                    <img src="images/airpodspro3.png" alt="AirPods Pro 3" class="product-img">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="max-w-[900px] mx-auto px-6 py-20">
+        <h3 class="text-3xl md:text-5xl font-black uppercase mb-12 text-center italic">ხშირად დასმული <span class="text-white/20 not-italic">კითხვები</span></h3>
+        <div class="space-y-4">
+            <div class="border border-white/5 rounded-2xl p-6 cursor-pointer hover:bg-white/[0.02] transition" onclick="toggleFaq(this)">
+                <div class="flex justify-between items-center">
+                    <h5 class="text-xs md:text-sm font-bold uppercase tracking-wider">არის თუ არა ორიგინალი?</h5>
+                    <span class="faq-plus text-xl text-white/20 transition-transform duration-300">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="text-white/50 text-xs leading-relaxed mt-4 pt-4 border-t border-white/5">პროდუქტი არის პრემიუმ 1:1 ანალოგი, ხარისხი და ვიზუალი არის სრულიად იდენტური და პროდუქტი არის პირველი ხარისხის რეპლიკა.</p>
+                </div>
+            </div>
+            <div class="border border-white/5 rounded-2xl p-6 cursor-pointer hover:bg-white/[0.02] transition" onclick="toggleFaq(this)">
+                <div class="flex justify-between items-center">
+                    <h5 class="text-xs md:text-sm font-bold uppercase tracking-wider">როგორ ხდება მიწოდება?</h5>
+                    <span class="faq-plus text-xl text-white/20 transition-transform duration-300">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="text-white/50 text-xs leading-relaxed mt-4 pt-4 border-t border-white/5">გორში მიწოდება ხდება შეკვეთიდან 1 დღეში, ხოლო სხვა დანარჩენ ქალაქებში 3-4 დღეში.</p>
+                </div>
+            </div>
+            <div class="border border-white/5 rounded-2xl p-6 cursor-pointer hover:bg-white/[0.02] transition" onclick="toggleFaq(this)">
+                <div class="flex justify-between items-center">
+                    <h5 class="text-xs md:text-sm font-bold uppercase tracking-wider">გაქვთ გარანტია?</h5>
+                    <span class="faq-plus text-xl text-white/20 transition-transform duration-300">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p class="text-white/50 text-xs leading-relaxed mt-4 pt-4 border-t border-white/5">ჯერჯერობით პროდუქციაზე არ ვრცელდება გარანტია.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="max-w-[1300px] mx-auto px-6 py-24 border-t border-white/5 text-center">
+        <div class="flex flex-col items-center gap-2 mb-10">
+            <span class="text-[10px] uppercase tracking-[0.4em] text-white/30 font-bold">საკონტაქტო ნომერი</span>
+            <a href="tel:+995596300602" class="text-3xl md:text-5xl font-black hover:text-white/70 transition tracking-tighter">
+                +995 596 300 602
+            </a>
+        </div>
+        
+        <div class="flex justify-center gap-10 items-center">
+            <a href="#" class="opacity-40 hover:opacity-100 hover:scale-110 transition-all duration-300">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.03 1.4-.54 2.79-1.47 3.85-1.14 1.27-2.81 1.99-4.52 2.23-1.73.22-3.51-.11-5-1.01-1.47-.88-2.61-2.31-3.13-3.89-.52-1.58-.45-3.33.21-4.85.64-1.47 1.83-2.7 3.32-3.37 1.49-.66 3.19-.78 4.75-.33v4.22c-1.29-.44-2.85-.26-3.94.51-1.1.77-1.7 2.15-1.46 3.48.24 1.33 1.34 2.45 2.67 2.7 1.32.26 2.82-.32 3.51-1.46.46-.75.59-1.64.58-2.52l.01-12.08Z"/></svg>
+            </a>
+            <a href="#" class="opacity-40 hover:opacity-100 hover:scale-110 transition-all duration-300">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61583583118979" class="opacity-40 hover:opacity-100 hover:scale-110 transition-all duration-300">
+                <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-sm bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[28px] p-1.5 flex justify-between items-center md:hidden z-[100]">
+        <div id="nav-home" class="flex-1 text-center text-[9px] font-bold uppercase tracking-widest py-3 transition-all duration-300 nav-pill-active" onclick="handleNav('home')">მთავარი</div>
+        <div id="nav-prod" class="flex-1 text-center text-[9px] font-bold uppercase tracking-widest py-3 transition-all duration-300 text-white/40" onclick="handleNav('prod')">პროდუქცია</div>
+    </div>
+
+    <script>
+        const lenis = new Lenis()
+        function raf(time) {
+            lenis.raf(time)
+            requestAnimationFrame(raf)
+        }
+        requestAnimationFrame(raf)
+
+        function openModal() {
+            const modal = document.getElementById('infoModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            gsap.fromTo(content, 
+                { scale: 0.9, opacity: 0, y: 20 }, 
+                { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.7)" }
+            );
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('infoModal');
+            const content = document.getElementById('modalContent');
+
+            gsap.to(content, {
+                scale: 0.9,
+                opacity: 0,
+                y: 20,
+                duration: 0.3,
+                ease: "power2.in",
+                onComplete: () => {
+                    modal.classList.add('hidden');
+                }
+            });
+        }
+
+        function updateNavColors(type) {
+            const homeBtn = document.getElementById('nav-home');
+            const prodBtn = document.getElementById('nav-prod');
+            if (type === 'home') {
+                homeBtn.classList.add('nav-pill-active');
+                homeBtn.classList.remove('text-white/40');
+                prodBtn.classList.remove('nav-pill-active');
+                prodBtn.classList.add('text-white/40');
+            } else {
+                prodBtn.classList.add('nav-pill-active');
+                prodBtn.classList.remove('text-white/40');
+                homeBtn.classList.remove('nav-pill-active');
+                homeBtn.classList.add('text-white/40');
+            }
+        }
+
+        function handleNav(type) {
+            if (type === 'home') {
+                lenis.scrollTo('body');
+            } else {
+                lenis.scrollTo('#special-offers');
+            }
+            updateNavColors(type);
+        }
+
+        function toggleFaq(el) {
+            el.classList.toggle('faq-active');
+        }
+
+        function startCountdown() {
+            const targetDate = new Date().getTime() + (2 * 24 * 60 * 60 * 1000); 
+            
+            setInterval(() => {
+                const now = new Date().getTime();
+                const dist = targetDate - now;
+                
+                document.getElementById('days').innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('minutes').innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('seconds').innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }, 1000);
+        }
+
+        window.addEventListener('load', () => {
+            gsap.registerPlugin(ScrollTrigger);
+            startCountdown();
+
+            ScrollTrigger.create({
+                trigger: "#special-offers", 
+                start: "top 60%", 
+                onEnter: () => updateNavColors('prod'), 
+                onLeaveBack: () => updateNavColors('home') 
+            });
+
+            gsap.utils.toArray("section").forEach(section => {
+                gsap.to(section, {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 95%",
+                        toggleActions: "play none none reverse"
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "expo.out"
+                });
+            });
+
+            gsap.to(".product-img", {
+                y: -10,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: "power1.inOut"
+            });
+        });
+    </script>
+</body>
+</html>
