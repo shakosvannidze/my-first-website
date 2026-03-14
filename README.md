@@ -11,3 +11,6 @@ I used AI tools to help generate the base code, then explored and modified it my
 
 ## Purpose
 This project was created for learning and experimenting, and also for a small AirPods business project with my friends.
+
+## Live Demo
+https://shakosvannidze.github.io/my-first-website
